@@ -1,4 +1,16 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+const UseEffectComponent = () => {
+  useEffect(() => {
+    return () => console.log("Компонент был удалён со страницы")
+  }, []);
+
+  return (
+    <div>
+      Тестовый компонент для проверки удаления компонента со страницы
+    </div>
+  )
+}
 
 const App = () => {
 
@@ -13,6 +25,10 @@ const App = () => {
     password: "",
   });
 
+  const [a, constA] = useState(0);
+  useEffect(() => {
+    console.log("1 рендер");
+  }, [count, form]);
 
   const onChangeHandle = (e) => {
     setName(e.target.value);
@@ -43,6 +59,10 @@ const App = () => {
       <p>Вы нажали на меня {count} раз(а)</p>
       <button onClick={() => setCount((prev) => prev + 1)}>Click me</button>
     
+
+      {
+        count >= 10 ? <h1>Компонент больше не доступен</h1> : <UseEffectComponent/>
+      }
       <br />
 
       <h1>Привет, {name}</h1>
