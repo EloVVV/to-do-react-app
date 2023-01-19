@@ -4,8 +4,7 @@ import TodoItem from "./components/TodoItem/TodoItem";
 
 
 const App = () => {
-
-  const [todos, setTodos] = useState([
+  const initialTodos = [
     {
       id: 1,
       name: "Купить продукты",
@@ -18,9 +17,14 @@ const App = () => {
       date: new Date(),
       checked: false
     }
-  ]);
+  ];
+  const [todos, setTodos] = useState(initialTodos);
 
-
+  useEffect(() => {
+    if(localStorage.getItem('todos') !== null) {
+      setTodos(JSON.parse(localStorage.getItem('todos')));
+    }
+  }, [todos]);
 
   return (
     <div>

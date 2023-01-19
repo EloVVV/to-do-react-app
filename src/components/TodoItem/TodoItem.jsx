@@ -5,32 +5,36 @@ const TodoItem = ({setTodos, todo}) => {
     // Переключение
     const onCheckedToggle = (id) => {
         setTodos((prevState) => {
-        prevState = [...prevState];
+            prevState = [...prevState];
 
-        prevState = prevState.map((todo) => {
-            if (todo.id === id) {
-            return {
-                ...todo,
-                checked: !todo.checked
-            };
-            }
+            prevState = prevState.map((todo) => {
+                if (todo.id === id) {
+                return {
+                    ...todo,
+                    checked: !todo.checked
+                };
+                }
 
-            return todo;
-        });
+                return todo;
+            });
 
-        return prevState;
+            localStorage.setItem('todos', JSON.stringify(prevState));
+
+            return prevState;
         });
     }
     // Удаление
     const onDeleteTodoById = (id) => {
-        setTodos((prevState) => {
-        prevState = [...prevState];
+            setTodos((prevState) => {
+            prevState = [...prevState];
 
-        // .filter()
+            // .filter()
 
-        prevState = prevState.filter((todo) => todo.id !== id);
+            prevState = prevState.filter((todo) => todo.id !== id);
 
-        return prevState;
+            localStorage.setItem('todos', JSON.stringify(prevState));
+            
+            return prevState;
         })
     }
 
